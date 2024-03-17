@@ -3,9 +3,6 @@ from django.http import HttpResponse
 from .models import Item
 from django.template import loader
 
-def index(request):
-    return HttpResponse("<h1>annyeong!</h1>")
-
 
 def item(request):
     item_list = Item.objects.all()
@@ -14,3 +11,11 @@ def item(request):
     }
 
     return render(request, 'food/index.html', context)
+
+
+def details(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    context = {
+        'item': item,
+    }
+    return render(request, 'food/details.html', context)
